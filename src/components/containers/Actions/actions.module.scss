@@ -1,0 +1,23 @@
+@import "../../../assets/styles/colors";
+
+.container {
+  border-radius: 8px;
+  background-color: $background-tinted-base;
+  padding: 25px 15px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.button {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  display: inline-block;
+  padding: 7px 25px;
+  border-radius: 9999px;
+  border: 0px;
+  cursor: pointer;
+}

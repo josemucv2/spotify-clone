@@ -1,0 +1,14 @@
+@import "../../../assets/styles/colors";
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  background-color: black !important;
+}
+
+.input:checked {
+  background-color: #1ed760 !important;
+}

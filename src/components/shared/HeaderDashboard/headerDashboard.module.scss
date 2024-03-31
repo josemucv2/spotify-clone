@@ -1,0 +1,17 @@
+@import "../../../assets/styles/colors";
+
+.botton_next_preview {
+  border-radius: 50%;
+  padding: 8px;
+  background-color: black;
+}
+
+.text_register {
+  font-size: 18px;
+  color: $text-subdued;
+}
+
+.text_register:hover {
+  color: white;
+  cursor: pointer;
+}

@@ -1,0 +1,18 @@
+@import "../../../assets/styles/colors";
+
+.icons {
+  width: 24px;
+  height: 24px;
+  margin-right: 18px;
+}
+
+.icons_text {
+  fill: $text-subdued;
+  color: $text-subdued;
+  font-size: 1.3rem;
+}
+
+.icons_text:hover {
+  fill: white;
+  color: white;
+}

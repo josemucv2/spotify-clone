@@ -1,0 +1,11 @@
+@import "../../assets/styles/colors";
+
+.text_title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.text_title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

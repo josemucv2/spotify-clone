@@ -1,0 +1,38 @@
+@import "../../../assets/styles/colors";
+
+.container {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  border-radius: 6px;
+  min-block-size: 48px;
+  z-index: 0;
+  color: $text-base;
+  padding-block: 12px;
+  padding-inline: 12px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+}
+
+.border_image_artist {
+  border-radius: 100%;
+}
+
+.border_image_album {
+  border-radius: 8px;
+}
+
+.container:hover {
+  background-color: $background-elevated-base;
+}
+
+.image_width_height {
+  width: 165px;
+  height: 165px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}

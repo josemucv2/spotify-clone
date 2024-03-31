@@ -1,0 +1,27 @@
+@import "../../../assets/styles/colors";
+
+.container {
+  border: 1px solid white;
+  border: 1px solid $essential-subdued;
+  border-radius: 2px;
+  height: 48px;
+}
+
+.input {
+  background-color: transparent;
+  padding: 0px 14px;
+  height: 100%;
+  width: 100%;
+}
+
+.label {
+  padding-bottom: 8px;
+}
+
+.container:hover {
+  border: 1px solid white;
+}
+
+.text_error {
+  color: $essential-negative;
+}

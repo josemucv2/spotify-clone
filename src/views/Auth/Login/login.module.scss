@@ -1,0 +1,59 @@
+@import "../../../assets/styles/colors";
+
+.container {
+  background-color: var($background-base, #ffffff);
+  color: white;
+  row-gap: normal;
+  border-radius: 0px;
+  padding: 0px 0px;
+  flex: 3 1 0%;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.element {
+  max-width: 734px;
+  width: 100%;
+  background-color: $background-base;
+  border-radius: 0px;
+  padding-bottom: 20px;
+}
+
+.title {
+  text-align: start;
+  margin: 20px 32px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.text_password {
+  font-size: 16px;
+}
+
+.not_account {
+  color: $text-subdued;
+  font-size: 16px;
+}
+
+.text_password:hover {
+  color: $essential-positive;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    border-radius: 8px;
+    padding: 32px 0px;
+  }
+
+  .element {
+    border-radius: 8px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    margin: 48px 0px;
+  }
+}

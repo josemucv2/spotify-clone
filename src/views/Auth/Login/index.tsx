@@ -19,7 +19,7 @@ export const Login = () => {
             content="Iniciar sesión"
             action={login}
             height="h-16"
-            bg_green
+            bg="bg_green_spotify"
           />
         </div>
         <div className="flex flex-col justify-center items-center my-10 space-y-7">

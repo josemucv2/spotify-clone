@@ -6,8 +6,6 @@ import karol from "@/assets/images/Karol.jpg";
 import mikeTower from "@/assets/images/Mike.jpg";
 import mora from "@/assets/images/Mora.jpg";
 import rauw from "@/assets/images/Rauw.jpg";
-export const TOKEN =
-  "Bearer BQC4caCXqvTfddOpLg5TrW5sDvUd_MDHCqzE8FjeJxpMc4mui-m9S4TAmCakLvYkAP8bIKKNYpsf0kkqg8EfkFMR5LB3PFYxU_fn592AHhfN--yBhF2luWVoeqgFDLpHZXWJiLnxGBNpjL7P1PF-Puiz7UPdyqH57WxBEjrPFYohU9lxZhvYDp-Ma-XjkwRoEpi7rIo63igZ5kh5dF6ri_rD1893cw";
 
 export const artist = [
   {

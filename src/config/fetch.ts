@@ -1,9 +1,15 @@
-interface PropsFetch {
+interface IPropsFetch {
   url: string;
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   options?: RequestInit;
   timeOut?: number;
   body?: unknown;
+}
+
+interface IAccessTokenSpotify {
+  access_token: string;
+  token_type: string;
+  expires_in: string;
 }
 
 export type CustomPromises<T> = Promise<
@@ -27,29 +33,58 @@ class HTTP {
     this.token = "";
   }
 
-  setToken(newToken: string) {
+  public setToken(newToken: string) {
     this.token = newToken;
   }
 
-  async request<T>({
+  public async getToken(): Promise<IAccessTokenSpotify> {
+    const {
+      VITE_BASE_URL_V1,
+      VITE_ID_CLIENT_SPOTIFY,
+      VITE_CLIENT_SPOTIFY_SECRET,
+    } = import.meta.env;
+
+    const response = await fetch(`${VITE_BASE_URL_V1}/token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: this.createBasicAuthHeader(
+          VITE_ID_CLIENT_SPOTIFY,
+          VITE_CLIENT_SPOTIFY_SECRET
+        ),
+      },
+      body: new URLSearchParams({
+        grant_type: "client_credentials",
+      }),
+    });
+
+    return await response.json();
+  }
+
+  private createBasicAuthHeader(username: string, password: string) {
+    const credentials = `${username}:${password}`;
+    return `Basic ${btoa(credentials)}`;
+  }
+
+  private async request<T>({
     url,
     method,
     options = {},
     body,
     timeOut = 100000000,
-  }: PropsFetch): CustomPromises<T> {
+  }: IPropsFetch): CustomPromises<T> {
     const { signal, abort } = new AbortController();
     const timeoutId = setTimeout(() => abort(), timeOut);
 
     const isFormData = body instanceof FormData;
 
     const defaultHeaders = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: this.token ? this.token : "",
     };
 
     const headers = isFormData
-      ? { Authorization: this.token }
+      ? { Authorization: `Bearer ${this.token}` }
       : { ...defaultHeaders, ...(options.headers || {}) };
 
     const requestOptions = {
@@ -66,7 +101,7 @@ class HTTP {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL_V1}/${url}`,
+        `${import.meta.env.VITE_BASE_URL_SPOTIFY_ACCESS}/${url}`,
         requestOptions
       );
       clearTimeout(timeoutId);
@@ -92,7 +127,7 @@ class HTTP {
     }
   }
 
-  async get<T>(url: string, options?: RequestInit) {
+  public async get<T>(url: string, options?: RequestInit) {
     const { data } = await this.request<T>({
       url,
       method: "GET",
@@ -101,7 +136,7 @@ class HTTP {
     return data;
   }
 
-  async post<T>(url: string, body: unknown, options?: RequestInit) {
+  public async post<T>(url: string, body: unknown, options?: RequestInit) {
     const { data } = await this.request<T>({
       url,
       method: "POST",
@@ -111,7 +146,7 @@ class HTTP {
     return data;
   }
 
-  async put<T>(url: string, body: unknown, options?: RequestInit) {
+  public async put<T>(url: string, body: unknown, options?: RequestInit) {
     const { data } = await this.request<T>({
       url,
       method: "PUT",
@@ -121,7 +156,7 @@ class HTTP {
     return data;
   }
 
-  async delete(url: string, options?: RequestInit) {
+  public async delete(url: string, options?: RequestInit) {
     const { data } = await this.request({
       url,
       method: "DELETE",
@@ -130,7 +165,7 @@ class HTTP {
     return data;
   }
 
-  async patch<T>(url: string, body?: unknown, options?: RequestInit) {
+  public async patch<T>(url: string, body?: unknown, options?: RequestInit) {
     const { data } = await this.request<T>({
       url,
       method: "PATCH",

@@ -6,17 +6,13 @@ interface IPropsFetch {
   body?: unknown;
 }
 
-interface IAccessTokenSpotify {
+export interface IAccessTokenSpotify {
   access_token: string;
   token_type: string;
-  expires_in: string;
+  expires_in: number;
 }
 
-export type CustomPromises<T> = Promise<
-  Response & {
-    data: T;
-  }
->;
+export type CustomPromises<T> = Promise<T>;
 
 /**
  * Property object to perform fetch requests.
@@ -80,11 +76,11 @@ class HTTP {
 
     const defaultHeaders = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: this.token ? this.token : "",
+      Authorization: this.token ? `Bearer  ${this.token}` : "",
     };
 
     const headers = isFormData
-      ? { Authorization: `Bearer ${this.token}` }
+      ? { Authorization: `Bearer  ${this.token}` }
       : { ...defaultHeaders, ...(options.headers || {}) };
 
     const requestOptions = {
@@ -128,7 +124,7 @@ class HTTP {
   }
 
   public async get<T>(url: string, options?: RequestInit) {
-    const { data } = await this.request<T>({
+    const data = await this.request<T>({
       url,
       method: "GET",
       options,
@@ -137,7 +133,7 @@ class HTTP {
   }
 
   public async post<T>(url: string, body: unknown, options?: RequestInit) {
-    const { data } = await this.request<T>({
+    const data = await this.request<T>({
       url,
       method: "POST",
       body,
@@ -147,7 +143,7 @@ class HTTP {
   }
 
   public async put<T>(url: string, body: unknown, options?: RequestInit) {
-    const { data } = await this.request<T>({
+    const data = await this.request<T>({
       url,
       method: "PUT",
       body,
@@ -157,7 +153,7 @@ class HTTP {
   }
 
   public async delete(url: string, options?: RequestInit) {
-    const { data } = await this.request({
+    const data = await this.request({
       url,
       method: "DELETE",
       options,
@@ -166,7 +162,7 @@ class HTTP {
   }
 
   public async patch<T>(url: string, body?: unknown, options?: RequestInit) {
-    const { data } = await this.request<T>({
+    const data = await this.request<T>({
       url,
       method: "PATCH",
       body,
